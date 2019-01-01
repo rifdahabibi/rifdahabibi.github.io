@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<title>Your Souvenir Ticket</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<body>
+<div style='text-align: center;padding: 10px 10px;'>
+    <h1>This is your souvenir ticket</h1>
+    <h3>Bring this to redeem your wedding souvenir</h3>
+    <img id='barcode'
+         src=""
+         alt=""
+         title="Souvenir Ticket"
+         width="250"
+         height="250"
+         style="border: 15px solid white;"/>
+</div>
+<script src="js/jquery.min.js"></script>
+<script>
+	    $(document).ready(function(){
+	      var urlParams = new URLSearchParams(window.location.search);
+		    	if(urlParams.has('qr') && urlParams.get('qr').startsWith("rh")) {
+		    		qr = urlParams.get('qr')
+		        	url = 'https://api.qrserver.com/v1/create-qr-code/?data=' + qr + '&amp;size=100x100';
+                	$('#barcode').attr('src', url);
+		    	} else {
+		    		window.location.replace("error.html");
+		    	}
+	    });
+</script>
+</body>
+</html>
